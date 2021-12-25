@@ -165,7 +165,7 @@ hex_input = [raw_input[i+2:i+4] for i in range(0, len(raw_input), 4)] # Removing
 hex_input =''.join(hex_input) # List to string
 print('\nInput:', hex_input,'\n\n')
 hex_input =  bytearray.fromhex(hex_input) # We got our final input byte array of hex data
-hex_input_short = hex_input[0:4] # Using a shorter bytearray for testing - assumg flag/result will start with RSXC
+hex_input_short = hex_input[0:4] # Using a shorter bytearray for testing - assuming flag/result will start with RSXC
 
 def xor(data, key):
     key = key * (len(hex_input) // len(key) + 1)
@@ -300,7 +300,7 @@ PEWJ{oqfgpylasqaqfzmgloxjgcezyigbglx}
  - [dcode.fr](https://www.dcode.fr/vigenere-cipher)
 
 ### Solution
-At first glance the ciphertext looked like some sort of [substituion cipher](https://en.wikipedia.org/wiki/Substitution_cipher). A quick [google search for _"indecipherable cipher"_](https://www.google.com/search?q=indecipherable%20cipher) gave overwhelming many hits for the good old [Vigenère cipher](https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher). (It turns out it got just that description in French (_"le chiffrage indéchiffrable"_) since it wasn't broken for centuries.)
+At first glance the ciphertext looked like some sort of [substitution cipher](https://en.wikipedia.org/wiki/Substitution_cipher). A quick [google search for _"indecipherable cipher"_](https://www.google.com/search?q=indecipherable%20cipher) gave overwhelming many hits for the good old [Vigenère cipher](https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher). (It turns out it got just that description in French (_"le chiffrage indéchiffrable"_) since it wasn't broken for centuries.)
 
 If the key would have been as long as the message itself ([one-time pad](https://en.wikipedia.org/wiki/One-time_pad)) I wouldn't have been able to break it. To solve this challenge I assumed that the plaintext started with `RSXC{`.
 
@@ -1155,7 +1155,7 @@ curl 'http://rsxc.no:20015/portal.php' \
 ```
 
 #### Alternative 2 - Directory traversal attack  🐱‍💻
-I accidently served the wrong file once and to my surprise I saw the server had another - seemingly not intentional - security vulnerability; a [directory traversal attack](https://en.wikipedia.org/wiki/Directory_traversal_attack). When I remotely served the wrong file it showed the contents of that file and a PHP error message.
+I accidentally served the wrong file once and to my surprise I saw the server had another - seemingly not intentional - security vulnerability; a [directory traversal attack](https://en.wikipedia.org/wiki/Directory_traversal_attack). When I remotely served the wrong file it showed the contents of that file and a PHP error message.
 
 It turned out that the PHP script use the infamous [`file_get_contents`](https://www.php.net/manual/en/function.file-get-contents.php) which loads remote as well as local files into a string, and which has been a source of countless security issues. When I changed it to a local file like `index.php` it showed the contents of that. Even without breaking [the rules](https://rsxc.no/rules.php) one then could use `{"kid": "portal.php"}` to get flag:
 
@@ -1193,7 +1193,7 @@ eval "$N0q$x$Hc2$rQW"
  - Unix shell
 
 ### Solution
-It's of course potenially dangerous to run unknown code like this. I deobfuscated the code in a "burner machine" (a throw-away virtual image). Even though I knew the calendar shouldn't be harmful I couldn't tell for sure that the code hadn't been replaced by some bad actor.
+It's of course potentially dangerous to run unknown code like this. I deobfuscated the code in a "burner machine" (a throw-away virtual image). Even though I knew the calendar shouldn't be harmful I couldn't tell for sure that the code hadn't been replaced by some bad actor.
 
 I manually changed the evil `eval` and `sh` expressions to `echo` and took it one step at the time. Luckily there weren't that many layers of obfuscation. At the last step there was a `curl` call to a non-existing flag at `http://rsxc.no/b60b34d2afcd4b3950e4c6341efbc10cdb70e782c70b2bf8950e305ad90ebd5f/flag.txt` + a Base64 encoded string which was hiding the actual flag.
 
@@ -1544,7 +1544,7 @@ The password for the Wi-Fi was `Santaclaws99`. I entered it in Wireshark and was
  - [Python](https://python.org)
 
 ### Solution
-On the website we're told that we are looking for the file `flag.txt` in a subfolder on the serverj. [`dirb`](https://www.kali.org/tools/dirb/) has a wordlist `small.txt` which contains the directory.
+On the website we're told that we are looking for the file `flag.txt` in a subfolder on the server. [`dirb`](https://www.kali.org/tools/dirb/) has a wordlist `small.txt` which contains the directory.
 
 I tried using `dirb` to find the directory, but all URLs seemed to answer with `HTTP` status `200 OK`, the text `404 - File not found` and the same `Content-Length`.
 
