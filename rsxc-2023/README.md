@@ -574,9 +574,10 @@ Very early on I noticed the strange notion of _"rivsec"_ in the text in the prev
 In the end it took about 0 seconds using my favourite fuzzing tool `ffuf`:
 
 ```bash
-$ ffuf -u https://function-lab-rivsec.azurewebsites.net/api/RivSecFunction1\?code\=kGwB9axaK4N7sTdBzO1SfPzNjsp17KCR25yQ4dTYBePoAzFuii5p_w\=\=\&
+$ ffuf -u https://function-lab-rivsec.azurewebsites.net/api/RivSecFunction1?code=kGwB9axaK4N7sTdBzO1SfPzNjsp17KCR25yQ4dTYBePoAzFuii5p_w==&rivsecFUZZ=rivsec -w lists/seclists/Discovery/Web-Content/burp-parameter-names.txt -fs 267
+
 ...
-rivsecFUZZ\=rivsec -w lists/seclists/Discovery/Web-Content/burp-parameter-names.txt -fs 267
+
 Admin                   [Status: 200, Size: 204, Words: 32, Lines: 1, Duration: 233ms]
 :: Progress: [6453/6453] :: Job [1/1] :: 389 req/sec :: Duration: [0:00:19] :: Errors: 0 ::
 ```
