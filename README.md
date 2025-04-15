@@ -1,5 +1,9 @@
 # Capture the flag (CTF) write-ups
 
+## Intigriti
+### 2025-04
+- [./intigriti-2025-04/](./intigriti-2025-04/#readme)
+
 ## NPST
 ### 2020
 - https://blog.roysolberg.com/2021/01/pst-challenge-5
